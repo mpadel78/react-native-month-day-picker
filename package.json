@@ -41,14 +41,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/user/react-native-month-day-picker"
+    "url": "git+https://github.com/mpadel78/react-native-month-day-picker.git"
   },
-  "author": "",
+  "author": "mpadel78",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/user/react-native-month-day-picker/issues"
+    "url": "https://github.com/mpadel78/react-native-month-day-picker/issues"
   },
-  "homepage": "https://github.com/user/react-native-month-day-picker#readme",
+  "homepage": "https://github.com/mpadel78/react-native-month-day-picker#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

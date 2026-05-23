@@ -4,19 +4,15 @@ const WheelPicker = React.forwardRef(
   ({ value, data, onValueChanged, testID, ...props }, ref) => {
     return React.createElement(
       'div',
-      { 'data-testid': testID, ref },
-      React.createElement(
-        'span',
-        { 'data-testid': `${testID}-value` },
-        String(value)
-      ),
+      { ...props, testID, ref },
+      React.createElement('span', { testID: `${testID}-value` }, String(value)),
       data.map((item) =>
         React.createElement(
           'button',
           {
             key: item.value,
-            'data-testid': `${testID}-item-${item.value}`,
-            onClick: () => onValueChanged && onValueChanged({ item }),
+            testID: `${testID}-item-${item.value}`,
+            onPress: () => onValueChanged && onValueChanged({ item }),
           },
           item.label
         )

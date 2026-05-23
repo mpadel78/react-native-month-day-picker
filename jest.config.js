@@ -13,10 +13,5 @@ module.exports = {
     '^@quidone/react-native-wheel-picker$':
       '<rootDir>/__mocks__/wheel-picker.js',
   },
-  // Only run utility and hook tests for now
-  testMatch: [
-    '**/__tests__/dateUtils.test.ts',
-    '**/__tests__/localeUtils.test.ts',
-    '**/__tests__/useBirthdayPicker.test.ts',
-  ],
+  testMatch: ['**/__tests__/**/*.test.ts', '**/__tests__/**/*.test.tsx'],
 };
