@@ -175,6 +175,7 @@ export function BirthdayPicker({
           onValueChanged={handleMonthChange}
           itemHeight={itemHeight}
           visibleItemCount={visibleItems}
+          overlayItemStyle={styles.overlayItem}
           testID={testID ? `${testID}-month` : undefined}
         />
       </View>
@@ -189,6 +190,7 @@ export function BirthdayPicker({
           onValueChanged={handleDayChange}
           itemHeight={itemHeight}
           visibleItemCount={visibleItems}
+          overlayItemStyle={styles.overlayItem}
           testID={testID ? `${testID}-day` : undefined}
         />
       </View>
@@ -204,6 +206,9 @@ const styles = StyleSheet.create({
   },
   pickerContainer: {
     flex: 1,
+  },
+  overlayItem: {
+    borderRadius: 0,
   },
 });
 
