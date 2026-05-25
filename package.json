@@ -1,6 +1,6 @@
 {
   "name": "react-native-month-day-picker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A privacy-friendly birthday picker for React Native that uses only month and day (no year)",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
