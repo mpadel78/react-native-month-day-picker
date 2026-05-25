@@ -9,6 +9,8 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts', '!src/index.ts'],
   moduleNameMapper: {
     '^react-native$': '<rootDir>/__mocks__/react-native.js',
+    '^react-native-safe-area-context$':
+      '<rootDir>/__mocks__/react-native-safe-area-context.js',
     '^react-native-month-day-picker$': '<rootDir>/src/index',
     '^@quidone/react-native-wheel-picker$':
       '<rootDir>/__mocks__/wheel-picker.js',

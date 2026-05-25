@@ -25,7 +25,7 @@ yarn add react-native-month-day-picker
 This package requires the following peer dependencies:
 
 ```bash
-npm install react-native-gesture-handler react-native-reanimated
+npm install react-native-gesture-handler react-native-reanimated react-native-safe-area-context
 ```
 
 If you're using Expo, these may already be included. Otherwise, follow the installation instructions for:
@@ -71,6 +71,7 @@ function MyComponent() {
 ```tsx
 import { useState } from 'react';
 import { Button } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   BirthdayPickerModal,
   BirthdayValue,
@@ -84,7 +85,7 @@ function MyComponent() {
   });
 
   return (
-    <>
+    <SafeAreaProvider>
       <Button title="Select Birthday" onPress={() => setVisible(true)} />
       <BirthdayPickerModal
         visible={visible}
@@ -96,7 +97,7 @@ function MyComponent() {
         onCancel={() => setVisible(false)}
         title="Select Your Birthday"
       />
-    </>
+    </SafeAreaProvider>
   );
 }
 ```

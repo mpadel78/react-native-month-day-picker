@@ -5,9 +5,9 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   Platform,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { BirthdayPicker } from './BirthdayPicker';
 import type { BirthdayPickerModalProps, BirthdayValue } from './types';
 import { DEFAULT_BIRTHDAY_VALUE } from './constants';
@@ -87,7 +87,7 @@ export function BirthdayPickerModal({
       testID={testID}
     >
       <View style={styles.overlay}>
-        <SafeAreaView style={styles.safeArea}>
+        <SafeAreaView style={styles.safeArea} edges={['bottom']}>
           <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>

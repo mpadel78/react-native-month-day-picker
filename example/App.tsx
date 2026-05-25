@@ -3,12 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import {
   BirthdayPicker,
   BirthdayPickerModal,
@@ -44,147 +44,151 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={styles.flex}>
-      <SafeAreaView style={styles.container}>
-        <StatusBar style="auto" />
-        <ScrollView style={styles.scrollView}>
-          <Text style={styles.title}>Birthday Picker Examples</Text>
+      <SafeAreaProvider>
+        <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+          <StatusBar style="auto" />
+          <ScrollView style={styles.scrollView}>
+            <Text style={styles.title}>Birthday Picker Examples</Text>
 
-          {/* Example 1: Uncontrolled Mode */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>1. Uncontrolled Mode</Text>
-            <Text style={styles.description}>
-              Uses defaultValue and onChange callback
-            </Text>
-            <BirthdayPicker
-              defaultValue={{ month: 1, day: 1 }}
-              onChange={setUncontrolledValue}
-              style={styles.picker}
-            />
-            <Text style={styles.value}>
-              Selected: {formatMonth(uncontrolledValue.month)}{' '}
-              {uncontrolledValue.day}
-            </Text>
-          </View>
-
-          {/* Example 2: Controlled Mode */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>2. Controlled Mode</Text>
-            <Text style={styles.description}>Value is managed externally</Text>
-            <BirthdayPicker
-              value={controlledValue}
-              onChange={setControlledValue}
-              style={styles.picker}
-            />
-            <Text style={styles.value}>
-              Selected: {formatMonth(controlledValue.month)}{' '}
-              {controlledValue.day}
-            </Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => setControlledValue({ month: 7, day: 4 })}
-            >
-              <Text style={styles.buttonText}>Set to July 4th</Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Example 3: Modal */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>3. Modal Presentation</Text>
-            <Text style={styles.description}>
-              Opens in a bottom sheet modal
-            </Text>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => setModalVisible(true)}
-            >
-              <Text style={styles.buttonText}>
-                {formatMonth(modalValue.month)} {modalValue.day} - Tap to Edit
+            {/* Example 1: Uncontrolled Mode */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>1. Uncontrolled Mode</Text>
+              <Text style={styles.description}>
+                Uses defaultValue and onChange callback
               </Text>
-            </TouchableOpacity>
-            <BirthdayPickerModal
-              visible={modalVisible}
-              value={modalValue}
-              onConfirm={(value) => {
-                setModalValue(value);
-                setModalVisible(false);
-              }}
-              onCancel={() => setModalVisible(false)}
-              title="Select Your Birthday"
-            />
-          </View>
-
-          {/* Example 4: Using Hook */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>
-              4. Using useBirthdayPicker Hook
-            </Text>
-            <Text style={styles.description}>
-              For custom picker implementations
-            </Text>
-            <View style={styles.hookDemo}>
-              <Text style={styles.hookValue}>
-                Value: {formatMonth(birthdayHook.value.month)}{' '}
-                {birthdayHook.value.day}
-              </Text>
-              <Text style={styles.hookInfo}>
-                Days in month: {birthdayHook.daysInMonth}
-              </Text>
-              <Text style={styles.hookInfo}>
-                Is valid: {birthdayHook.isValid ? 'Yes' : 'No'}
+              <BirthdayPicker
+                defaultValue={{ month: 1, day: 1 }}
+                onChange={setUncontrolledValue}
+                style={styles.picker}
+              />
+              <Text style={styles.value}>
+                Selected: {formatMonth(uncontrolledValue.month)}{' '}
+                {uncontrolledValue.day}
               </Text>
             </View>
-            <View style={styles.buttonRow}>
+
+            {/* Example 2: Controlled Mode */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>2. Controlled Mode</Text>
+              <Text style={styles.description}>
+                Value is managed externally
+              </Text>
+              <BirthdayPicker
+                value={controlledValue}
+                onChange={setControlledValue}
+                style={styles.picker}
+              />
+              <Text style={styles.value}>
+                Selected: {formatMonth(controlledValue.month)}{' '}
+                {controlledValue.day}
+              </Text>
               <TouchableOpacity
-                style={styles.smallButton}
-                onPress={() => birthdayHook.setMonth(2)}
+                style={styles.button}
+                onPress={() => setControlledValue({ month: 7, day: 4 })}
               >
-                <Text style={styles.buttonText}>Feb</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.smallButton}
-                onPress={() => birthdayHook.setDay(29)}
-              >
-                <Text style={styles.buttonText}>29th</Text>
+                <Text style={styles.buttonText}>Set to July 4th</Text>
               </TouchableOpacity>
             </View>
-          </View>
 
-          {/* Example 5: Different Locales */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>5. Different Locales</Text>
-            <Text style={styles.description}>German locale (de-DE)</Text>
-            <BirthdayPicker
-              defaultValue={{ month: 10, day: 3 }}
-              locale="de-DE"
-              style={styles.picker}
-            />
-          </View>
+            {/* Example 3: Modal */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>3. Modal Presentation</Text>
+              <Text style={styles.description}>
+                Opens in a bottom sheet modal
+              </Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => setModalVisible(true)}
+              >
+                <Text style={styles.buttonText}>
+                  {formatMonth(modalValue.month)} {modalValue.day} - Tap to Edit
+                </Text>
+              </TouchableOpacity>
+              <BirthdayPickerModal
+                visible={modalVisible}
+                value={modalValue}
+                onConfirm={(value) => {
+                  setModalValue(value);
+                  setModalVisible(false);
+                }}
+                onCancel={() => setModalVisible(false)}
+                title="Select Your Birthday"
+              />
+            </View>
 
-          {/* Example 6: Short Month Format */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>6. Short Month Format</Text>
-            <Text style={styles.description}>Abbreviated month names</Text>
-            <BirthdayPicker
-              defaultValue={{ month: 8, day: 15 }}
-              monthFormat="short"
-              style={styles.picker}
-            />
-          </View>
+            {/* Example 4: Using Hook */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>
+                4. Using useBirthdayPicker Hook
+              </Text>
+              <Text style={styles.description}>
+                For custom picker implementations
+              </Text>
+              <View style={styles.hookDemo}>
+                <Text style={styles.hookValue}>
+                  Value: {formatMonth(birthdayHook.value.month)}{' '}
+                  {birthdayHook.value.day}
+                </Text>
+                <Text style={styles.hookInfo}>
+                  Days in month: {birthdayHook.daysInMonth}
+                </Text>
+                <Text style={styles.hookInfo}>
+                  Is valid: {birthdayHook.isValid ? 'Yes' : 'No'}
+                </Text>
+              </View>
+              <View style={styles.buttonRow}>
+                <TouchableOpacity
+                  style={styles.smallButton}
+                  onPress={() => birthdayHook.setMonth(2)}
+                >
+                  <Text style={styles.buttonText}>Feb</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.smallButton}
+                  onPress={() => birthdayHook.setDay(29)}
+                >
+                  <Text style={styles.buttonText}>29th</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
 
-          {/* Example 7: No Leap Day */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>7. No Leap Day</Text>
-            <Text style={styles.description}>February has only 28 days</Text>
-            <BirthdayPicker
-              defaultValue={{ month: 2, day: 15 }}
-              allowLeapDay={false}
-              style={styles.picker}
-            />
-          </View>
+            {/* Example 5: Different Locales */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>5. Different Locales</Text>
+              <Text style={styles.description}>German locale (de-DE)</Text>
+              <BirthdayPicker
+                defaultValue={{ month: 10, day: 3 }}
+                locale="de-DE"
+                style={styles.picker}
+              />
+            </View>
 
-          <View style={styles.footer} />
-        </ScrollView>
-      </SafeAreaView>
+            {/* Example 6: Short Month Format */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>6. Short Month Format</Text>
+              <Text style={styles.description}>Abbreviated month names</Text>
+              <BirthdayPicker
+                defaultValue={{ month: 8, day: 15 }}
+                monthFormat="short"
+                style={styles.picker}
+              />
+            </View>
+
+            {/* Example 7: No Leap Day */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>7. No Leap Day</Text>
+              <Text style={styles.description}>February has only 28 days</Text>
+              <BirthdayPicker
+                defaultValue={{ month: 2, day: 15 }}
+                allowLeapDay={false}
+                style={styles.picker}
+              />
+            </View>
+
+            <View style={styles.footer} />
+          </ScrollView>
+        </SafeAreaView>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
